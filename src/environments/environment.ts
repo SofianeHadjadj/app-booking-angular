@@ -5,6 +5,6 @@
 
 export const environment = {
     production: false,
-    SERVER_ADDR: "10.10.0.109",
+    SERVER_ADDR: "localhost",
     BOOKING_PORT: "3200"
   };
