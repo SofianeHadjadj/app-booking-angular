@@ -20,6 +20,8 @@ export class ReservationComponent implements OnInit {
 
   goodformatdate: any;
 
+  dateDepart = new FormControl();
+
   all_room : Array<Room> = new Array; 
   current_room: Room = new Room; 
   room_list : Array<Room> = new Array;
@@ -45,6 +47,8 @@ export class ReservationComponent implements OnInit {
 
     console.log(this.goodformatdate);
 
+    // Récupération des données sur les chambres depuis le backend
+
       this.http.get('http://' + this.env.SERVER_ADDR + ':' + this.env.BOOKING_PORT + '/v1/rooms').subscribe(data => {
       
       // Insertion des rooms dans la card_list
@@ -62,6 +66,8 @@ export class ReservationComponent implements OnInit {
       
       console.log(this.all_room);
     });
+
+    // Récupération des données sur les clients depuis le backend
 
     this.http.get('http://' + this.env.SERVER_ADDR + ':' + this.env.BOOKING_PORT + '/v1/clients').subscribe(data => {
       
@@ -163,17 +169,7 @@ export class ReservationComponent implements OnInit {
 
   // END CLIENT FUNCTIONS
 
-    onSubmit() {
-    }
-
-    onReset() {
-    }
-
   // FONCTION DE BOOKING FINALE
-
-  // reservation(client_id, room_id, departure_date, arrival_date) {
-  //   this.bookingservice.reservation(client_id, room_id,this.datepipe.transform(arrival_date, 'yyyy-MM-dd hh:mm:ss'),this.datepipe.transform(departure_date, 'yyyy-MM-dd hh:mm:ss'));
-  // } 
 
   onFormSubmit() {
     this.bookingservice.reservation(this.bookingForm.value);

@@ -5,6 +5,8 @@
                 <option *ngFor="let client of all_client" (change)="append_list_client(client)" value="{{client.id}}">{{client.first_name}} {{client.last_name}}</option>
         </select>
         <br><br>
+        <span style="color:brown">VEUILLEZ SAISIR DES DATES AU FORMAT : JJ/MM/AAAA</span>
+        <br><br>
         <label>Date d'arrivée : </label>
         <input formControlName="arrival_date" matInput [matDatepicker]="arrival">
         <mat-datepicker-toggle matSuffix [for]="arrival">
@@ -16,7 +18,7 @@
         <br><br>
         <br><br>
         <label>Date de depart : </label>
-        <input formControlName="departure_date" matInput [matDatepicker]="departure">
+        <input formControlName="departure_date" matInput [matDatepicker]="departure" [formControl]="dateDepart">
         <mat-datepicker-toggle matSuffix [for]="departure">
             <mat-icon style="color: brown;" matDatepickerToggleIcon>
                 calendar_today
@@ -29,10 +31,7 @@
                 <option *ngFor="let room of all_room" (change)="append_list_room(room)" value="{{room.id}}">{{room.room_name}}</option>
         </select>
         <br><br>
-        <!-- <input (click)="reservation( client_list[0], room_list[0], arrival.value, departure.value )" type="submit"> -->
-        <!-- <input (click)="reservation( 19, 19, arrival.value, departure.value )" type="submit"> -->
         <input type="submit" value="Reserver">
     </form>
     
 </div>
- 
