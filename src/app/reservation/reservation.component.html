@@ -1,30 +1,38 @@
- <form>
-    <label>Identité du client : </label>
-    <select name="client">
-            <option *ngFor="let client of all_client" (change)="append_list_client(client)" value="{{client.id}}">{{client.first_name}} {{client.last_name}}</option>
-    </select>
-    <br><br>
-    <label>Date d'arrivée : </label>
-    <input name="arrival" matInput [matDatepicker]="arrival">
-    <mat-datepicker-toggle matSuffix [for]="arrival">
-        <mat-icon style="color: brown;" matDatepickerToggleIcon>
-            calendar_today
-        </mat-icon>
-    </mat-datepicker-toggle>
-    <mat-datepicker #arrival></mat-datepicker>
-    <br><br>
-    <br><br>
-    <label>Date de depart : </label>
-    <input name="departure" matInput [matDatepicker]="departure">
-    <mat-datepicker-toggle matSuffix [for]="departure">
-        <mat-icon style="color: brown;" matDatepickerToggleIcon>
-            calendar_today
-        </mat-icon>
-    </mat-datepicker-toggle>
-    <mat-datepicker #departure></mat-datepicker>
-    <br><br>
-    <label>Chambre disponibles : </label>
-    <select name="room">
-            <option *ngFor="let room of all_room" (change)="append_list_room(room)" value="{{room.id}}">{{room.room_name}}</option>
-    </select>
- </form>
+<div id="wrap-form">
+    <form [formGroup]="bookingForm" (ngSubmit)="onFormSubmit()">
+        <label>Identité du client : </label>
+        <select formControlName="client_id">
+                <option *ngFor="let client of all_client" (change)="append_list_client(client)" value="{{client.id}}">{{client.first_name}} {{client.last_name}}</option>
+        </select>
+        <br><br>
+        <label>Date d'arrivée : </label>
+        <input formControlName="arrival_date" matInput [matDatepicker]="arrival">
+        <mat-datepicker-toggle matSuffix [for]="arrival">
+            <mat-icon style="color: brown;" matDatepickerToggleIcon>
+                calendar_today
+            </mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #arrival></mat-datepicker>
+        <br><br>
+        <br><br>
+        <label>Date de depart : </label>
+        <input formControlName="departure_date" matInput [matDatepicker]="departure">
+        <mat-datepicker-toggle matSuffix [for]="departure">
+            <mat-icon style="color: brown;" matDatepickerToggleIcon>
+                calendar_today
+            </mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #departure></mat-datepicker>
+        <br><br>
+        <label>Chambre disponibles : </label>
+        <select formControlName="room_id">
+                <option *ngFor="let room of all_room" (change)="append_list_room(room)" value="{{room.id}}">{{room.room_name}}</option>
+        </select>
+        <br><br>
+        <!-- <input (click)="reservation( client_list[0], room_list[0], arrival.value, departure.value )" type="submit"> -->
+        <!-- <input (click)="reservation( 19, 19, arrival.value, departure.value )" type="submit"> -->
+        <input type="submit" value="Reserver">
+    </form>
+    
+</div>
+ 

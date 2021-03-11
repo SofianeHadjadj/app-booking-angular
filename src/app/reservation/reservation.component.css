@@ -3,3 +3,7 @@
     color :rgb(240, 74, 74);
     font-weight: bold;
 }
+
+#wrap-form {
+    padding: 50px;
+}

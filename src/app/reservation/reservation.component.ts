@@ -4,6 +4,7 @@ import { Client, Room, Booking } from './db-structure';
 import { environment } from '../../environments/environment';
 import { BookingService } from './services/booking.service';
 import { DatePipe } from '@angular/common';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'reservation',
@@ -27,9 +28,16 @@ export class ReservationComponent implements OnInit {
   current_client: Client = new Client; 
   client_list : Array<Client> = new Array;
 
-  constructor(private http:HttpClient, private bookingservice: BookingService, public datepipe: DatePipe) {
+  constructor(private http:HttpClient, private bookingservice: BookingService, public datepipe: DatePipe,private formBuilder: FormBuilder) {
     this.env = environment;
   } 
+
+  bookingForm = this.formBuilder.group({
+    client_id : '',
+    room_id : '',
+    arrival_date : '',
+    departure_date : ''
+  });
 
   ngOnInit() {
 
@@ -160,4 +168,16 @@ export class ReservationComponent implements OnInit {
 
     onReset() {
     }
+
+  // FONCTION DE BOOKING FINALE
+
+  // reservation(client_id, room_id, departure_date, arrival_date) {
+  //   this.bookingservice.reservation(client_id, room_id,this.datepipe.transform(arrival_date, 'yyyy-MM-dd hh:mm:ss'),this.datepipe.transform(departure_date, 'yyyy-MM-dd hh:mm:ss'));
+  // } 
+
+  onFormSubmit() {
+    this.bookingservice.reservation(this.bookingForm.value);
+    this.bookingForm.reset();
+  }
+
 }
